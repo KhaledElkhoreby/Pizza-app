@@ -1,0 +1,15 @@
+// Mixins
+@mixin center-content {
+  display: grid;
+  place-items: center;
+}
+@mixin reset-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@mixin rounded-circle($length) {
+  width: $length;
+  height: $length;
+  border-radius: 50%;
+}
