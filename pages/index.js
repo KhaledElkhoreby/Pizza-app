@@ -1,5 +1,7 @@
+import Container from "@mui/material/Container";
 import Head from "next/head";
 import Features from "../components/Features";
+import PizzaList from "../components/PizzaList";
 
 export default function Home() {
   return (
@@ -10,6 +12,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Features />
+      <Container maxWidth="xl">
+        <PizzaList />
+      </Container>
     </div>
   );
 }
