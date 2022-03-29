@@ -9,6 +9,7 @@
   top: 0;
   color: #fff;
   font-weight: 500;
+  height: 100px;
   @include mixins.reset-ul();
   li {
     padding: 0.1em 0;

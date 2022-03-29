@@ -14,7 +14,13 @@ const Navbar = () => {
       <ul className={classes.container}>
         <li className={classes.phone}>
           <div>
-            <Image src={phone} alt="phone" width={30} height={30} />
+            <Image
+              src={phone}
+              alt="phone"
+              width={30}
+              height={30}
+              objectFit="contain"
+            />
           </div>
           <div>
             <p>ORDER NOW!</p>
@@ -27,7 +33,13 @@ const Navbar = () => {
             <li>Products</li>
             <li>Menu</li>
             <li>
-              <Image src={logo} alt="Logo" width={160} height={69} />
+              <Image
+                src={logo}
+                alt="Logo"
+                width={160}
+                height={69}
+                objectFit="contain"
+              />
             </li>
             <li>Events</li>
             <li>Blog</li>
