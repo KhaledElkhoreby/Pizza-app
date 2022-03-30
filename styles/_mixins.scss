@@ -23,6 +23,7 @@
   background-color: variables.$primary-color;
   font-weight: 600;
   transition: all 0.3s ease;
+  cursor: pointer;
   &:focus,
   &:hover,
   &:active {

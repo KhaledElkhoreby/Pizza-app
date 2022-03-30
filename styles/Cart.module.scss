@@ -84,5 +84,10 @@ $primary-color: variables.$primary-color;
 @media screen and (max-width: 769px) {
   .container {
     flex-direction: column;
+    .cartTotal {
+      div {
+        font-size: 0.85rem;
+      }
+    }
   }
 }
