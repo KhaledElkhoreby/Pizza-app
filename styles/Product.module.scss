@@ -93,7 +93,7 @@
         width: 4em;
         margin-right: 2em;
         border-radius: 5px;
-        padding: 0.25em 0.5em;
+        padding: 0.5em 0.75em;
         padding-right: 0;
         border: 2px solid variables.$primary-color;
         outline: none;
@@ -104,17 +104,7 @@
         }
       }
       button {
-        border-radius: 5px;
-        padding: 0.25em 0.5em;
-        border: 2px solid variables.$primary-color;
-        background-color: variables.$primary-color;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        &:focus,
-        &:hover,
-        &:active {
-          box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
-        }
+        @include mixins.button;
       }
     }
   }
