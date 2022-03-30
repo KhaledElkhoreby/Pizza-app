@@ -1,0 +1,147 @@
+@use "./mixins";
+@use "./variables";
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  min-height: calc(100vh - 100px);
+  padding: 60px 0;
+  gap: 28px;
+
+  //! Image
+  .image {
+    position: relative;
+    @include mixins.center-content();
+    flex: 1;
+  }
+
+  //! details
+  .details {
+    flex: 1;
+    // padding: 20px 0;
+
+    .title {
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 0;
+    }
+
+    .price {
+      color: variables.$primary-color;
+      font-weight: 600;
+    }
+
+    .desc {
+      font-size: 18px;
+    }
+
+    .supTitle {
+      font-weight: bold;
+    }
+
+    .sizes {
+      display: flex;
+      max-height: 150px;
+      padding: 10px 0;
+      gap: 4em;
+
+      div {
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          div {
+            transform: scale(1.25);
+          }
+        }
+
+        div {
+          position: absolute;
+          top: -4px;
+          right: -40%;
+          border-radius: 5px;
+          padding: 0.01em 0.25em;
+          background-color: transparentize(
+            $color: variables.$primary-color,
+            $amount: 0.2
+          );
+          font-weight: 600;
+        }
+      }
+
+      .large {
+        div {
+          right: 1%;
+        }
+      }
+    }
+
+    .ingredients {
+      display: flex;
+      gap: 2em;
+      row-gap: 1em;
+      flex-wrap: wrap;
+      margin: 2em 0;
+
+      label {
+        min-width: 25%;
+      }
+    }
+
+    .submit {
+      input {
+        width: 4em;
+        margin-right: 2em;
+        border-radius: 5px;
+        padding: 0.25em 0.5em;
+        padding-right: 0;
+        border: 2px solid variables.$primary-color;
+        outline: none;
+        transition: all 0.3s ease;
+        &:focus,
+        &:hover {
+          box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        }
+      }
+      button {
+        border-radius: 5px;
+        padding: 0.25em 0.5em;
+        border: 2px solid variables.$primary-color;
+        background-color: variables.$primary-color;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        &:focus,
+        &:hover,
+        &:active {
+          box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sizes {
+    justify-content: center;
+  }
+
+  .ingredients {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .submit {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 769px) {
+  .ingredients {
+    flex-direction: row;
+  }
+}

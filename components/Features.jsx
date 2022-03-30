@@ -4,11 +4,9 @@ import { useState } from "react";
 import arrow1 from "../public/images/arrowl.png";
 import arrow from "../public/images/arrowr.png";
 
+import myLoader from "../helper/myLoader";
 import classes from "../styles/Features.module.scss";
 
-const myLoader = ({ src }) => {
-  return `/images/${src}`;
-};
 const Features = () => {
   const [index, setIndex] = useState(0);
   const images = ["featured.png", "featured2.png", "featured3.png"];
