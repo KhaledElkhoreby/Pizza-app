@@ -2,7 +2,8 @@ import PizzaCard from "./PizzaCard";
 
 import classes from "../styles/PizzaList.module.scss";
 
-const PizzaList = () => {
+const PizzaList = ({ products: PizzaList }) => {
+  console.log("PizzaList: ", PizzaList);
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>THE BEST PIZZA IN TOWN</h1>
@@ -13,14 +14,9 @@ const PizzaList = () => {
         repellat natus?
       </p>
       <div className={classes.wrapper}>
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
+        {PizzaList?.map((pizza) => (
+          <PizzaCard key={pizza._id} pizza={pizza} />
+        ))}
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import Container from "@mui/material/Container";
+import axios from "axios";
 import Head from "next/head";
 import Features from "../components/Features";
 import PizzaList from "../components/PizzaList";
 
-export default function Home() {
+export default function Home({ products }) {
+  console.log("products: ", products);
   return (
     <div>
       <Head>
@@ -13,8 +15,20 @@ export default function Home() {
       </Head>
       <Features />
       <Container maxWidth="xl">
-        <PizzaList />
+        <PizzaList products={products} />
       </Container>
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+  const { data: products } = await axios.get(
+    "http://localhost:3000/api/products"
+  );
+  console.log(products);
+  return {
+    props: {
+      products,
+    },
+  };
+};

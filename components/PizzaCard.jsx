@@ -1,18 +1,25 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import pizzaImage from "../public/images/pizza.png";
+import myLoader from "../helper/myLoader";
 import classes from "../styles/PizzaCard.module.scss";
-const PizzaCard = () => {
+const PizzaCard = ({ pizza }) => {
+  console.log("pizza", pizza);
   return (
-    <div className={classes.container}>
-      <Image src={pizzaImage} alt="" width="500" height="500" />
-      <h1 className={classes.title}>FIORI DI ZUCCA</h1>
-      <span className={classes.price}>$19.00</span>
-      <p className={classes.desc}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
-        autem?
-      </p>
-    </div>
+    <Link href={`/products/${pizza._id}`} passHref>
+      <div className={classes.container}>
+        <Image
+          loader={myLoader}
+          src={pizza?.img}
+          alt=""
+          width="500"
+          height="500"
+        />
+        <h1 className={classes.title}>{pizza?.title}</h1>
+        <span className={classes.price}>${pizza?.prices[0]}</span>
+        <p className={classes.desc}>{pizza?.desc}</p>
+      </div>
+    </Link>
   );
 };
 
