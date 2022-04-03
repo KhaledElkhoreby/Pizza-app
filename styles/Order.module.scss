@@ -1,5 +1,5 @@
 @use "./mixins";
-@use "./variables";
+@use "./variables.module.scss";
 
 $primary-color: variables.$primary-color;
 

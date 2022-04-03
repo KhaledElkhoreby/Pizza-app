@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Container from "@mui/material/Container";
+import { Container } from "@mantine/core";
 import axios from "axios";
 
 import myLoader from "../../helper/myLoader";
@@ -46,7 +46,7 @@ const Product = ({ product: pizza }) => {
     }
   };
   return (
-    <Container maxWidth="xl">
+    <Container size="xl">
       <div className={classes.container}>
         <div className={classes.image}>
           <Image

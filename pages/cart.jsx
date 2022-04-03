@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Container from "@mui/material/Container";
-
+import { Container } from "@mantine/core";
 import myLoader from "./../helper/myLoader";
 
 import classes from "../styles/Cart.module.scss";
@@ -15,7 +14,7 @@ const cartItems = {
 };
 const Cart = () => {
   return (
-    <Container maxWidth="xl">
+    <Container size="xl">
       <div className={classes.container}>
         <div className={classes.table}>
           <table>

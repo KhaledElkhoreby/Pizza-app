@@ -10,3 +10,7 @@ $xxl: 1400px;
 $primary-color: #d1401d;
 
 $showdow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+:export {
+  primaryColor: $primary-color;
+}

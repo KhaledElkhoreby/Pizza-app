@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Container from "@mui/material/Container";
-
+import { Container } from "@mantine/core";
 import myLoader from "../../helper/myLoader";
 import classes from "../../styles/Order.module.scss";
 
@@ -13,7 +12,7 @@ const Order = () => {
     if (index - status > 1) return classes.undone;
   };
   return (
-    <Container maxWidth="xl">
+    <Container size="xl">
       <div className={classes.container}>
         <div className={classes.left}>
           <div className={classes.orderDetails}>

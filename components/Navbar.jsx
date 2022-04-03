@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Badge from "@mui/material/Badge";
+import { Badge } from "@mantine/core";
 
 import charImage from "../public/images/cart.png";
 import phone from "../public/images/telephone.png";
@@ -7,7 +7,7 @@ import logo from "../public/images/logo.png";
 
 import classes from "../styles/Navbar.module.scss";
 
-const Navbar = () => {
+const Navbar = ({ color }) => {
   return (
     <ul className={classes.container}>
       <li className={classes.phone}>
@@ -45,8 +45,19 @@ const Navbar = () => {
         </ul>
       </li>
       <li className={classes.cart}>
-        <Badge color="badge" badgeContent={0} showZero>
-          <Image alt="cart" src={charImage} width={30} height={30} />
+        <Image alt="cart" src={charImage} width={30} height={30} />
+        <Badge
+          sx={{
+            padding: ".4em",
+            fontSize: ".9rem",
+            color: `${color.primaryColor}`,
+            backgroundColor: "#fff",
+            position: "absolute",
+            top: "25px",
+            right: "-2px",
+          }}
+        >
+          0
         </Badge>
       </li>
     </ul>

@@ -1,4 +1,4 @@
-import Container from "@mui/material/Container";
+import { Container } from "@mantine/core";
 import axios from "axios";
 import Head from "next/head";
 import Features from "../components/Features";
@@ -14,7 +14,7 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Features />
-      <Container maxWidth="xl">
+      <Container size="xl">
         <PizzaList products={products} />
       </Container>
     </div>
