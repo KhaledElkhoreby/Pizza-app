@@ -7,6 +7,8 @@ import imageSize from "../../public/images/size.png";
 
 import classes from "../../styles/Product.module.scss";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cartSlice";
 
 const Product = ({ product: pizza }) => {
   const [price, setPrice] = useState(pizza.prices[0]);
@@ -14,11 +16,17 @@ const Product = ({ product: pizza }) => {
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
 
+  const dispatch = useDispatch();
+
   console.log("price: ", price);
   console.log("size: ", size);
   console.log("quantity: ", quantity);
   console.log("Extras: ", extras);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(addProduct({ ...pizza, price, size, quantity, extras }));
+  };
   const changeQuantityHandler = (e) => {
     const q = e.target.value;
     const priceWithOutQuantity = price / quantity;
@@ -63,7 +71,7 @@ const Product = ({ product: pizza }) => {
           <h1 className={classes.title}>{pizza?.title}</h1>
           <h3 className={classes.price}>${price}</h3>
           <p className={classes.desc}>{pizza?.desc}</p>
-          <form>
+          <form onSubmit={submitHandler}>
             <h3 className={classes.supTitle}>Choose the size</h3>
             <div className={classes.sizes}>
               <div

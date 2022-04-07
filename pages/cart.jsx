@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Container } from "@mantine/core";
-import myLoader from "./../helper/myLoader";
+import { useSelector } from "react-redux";
 
+import myLoader from "./../helper/myLoader";
 import classes from "../styles/Cart.module.scss";
 
 const cartItems = {
@@ -13,6 +14,7 @@ const cartItems = {
   total: 40,
 };
 const Cart = () => {
+  const products = useSelector((state) => state.cart.products);
   return (
     <Container size="xl">
       <div className={classes.container}>
@@ -29,54 +31,26 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className={classes.imgContainer}>
-                  <Image
-                    alt=""
-                    loader={myLoader}
-                    src={cartItems.src}
-                    width={100}
-                    height={100}
-                  />
-                </td>
-                <td className={classes.name}>{cartItems.Name}</td>
-                <td className={classes.extra}>{cartItems.Extras}</td>
-                <td className={classes.price}>{cartItems.price}</td>
-                <td className={classes.quantity}>{cartItems.quantity}</td>
-                <td className={classes.total}>{cartItems.total}</td>
-              </tr>
-              <tr>
-                <td className={classes.imgContainer}>
-                  <Image
-                    alt=""
-                    loader={myLoader}
-                    src={cartItems.src}
-                    width={100}
-                    height={100}
-                  />
-                </td>
-                <td className={classes.name}>{cartItems.Name}</td>
-                <td className={classes.extra}>{cartItems.Extras}</td>
-                <td className={classes.price}>{cartItems.price}</td>
-                <td className={classes.quantity}>{cartItems.quantity}</td>
-                <td className={classes.total}>{cartItems.total}</td>
-              </tr>
-              <tr>
-                <td className={classes.imgContainer}>
-                  <Image
-                    alt=""
-                    loader={myLoader}
-                    src={cartItems.src}
-                    width={100}
-                    height={100}
-                  />
-                </td>
-                <td className={classes.name}>{cartItems.Name}</td>
-                <td className={classes.extra}>{cartItems.Extras}</td>
-                <td className={classes.price}>{cartItems.price}</td>
-                <td className={classes.quantity}>{cartItems.quantity}</td>
-                <td className={classes.total}>{cartItems.total}</td>
-              </tr>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td className={classes.imgContainer}>
+                    <Image
+                      alt=""
+                      loader={myLoader}
+                      src={product.img}
+                      width={100}
+                      height={100}
+                    />
+                  </td>
+                  <td className={classes.name}>{product?.title}</td>
+                  <td className={classes.extra}>
+                    {product?.extras.map((extra) => `${extra.text}, `)}
+                  </td>
+                  <td className={classes.price}>{product?.price}</td>
+                  <td className={classes.quantity}>{product?.quantity}</td>
+                  <td className={classes.total}>{product?.total}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

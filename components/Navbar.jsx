@@ -1,13 +1,16 @@
 import Image from "next/image";
 import { Badge } from "@mantine/core";
+import { useSelector } from "react-redux";
 
 import charImage from "../public/images/cart.png";
 import phone from "../public/images/telephone.png";
 import logo from "../public/images/logo.png";
 
 import classes from "../styles/Navbar.module.scss";
+import Link from "next/link";
 
 const Navbar = ({ color }) => {
+  const cart = useSelector((state) => state.cart);
   return (
     <ul className={classes.container}>
       <li className={classes.phone}>
@@ -44,22 +47,24 @@ const Navbar = ({ color }) => {
           <li>Contact</li>
         </ul>
       </li>
-      <li className={classes.cart}>
-        <Image alt="cart" src={charImage} width={30} height={30} />
-        <Badge
-          sx={{
-            padding: ".4em",
-            fontSize: ".9rem",
-            color: `${color.primaryColor}`,
-            backgroundColor: "#fff",
-            position: "absolute",
-            top: "25px",
-            right: "-2px",
-          }}
-        >
-          0
-        </Badge>
-      </li>
+      <Link href="/cart" passHref>
+        <li className={classes.cart}>
+          <Image alt="cart" src={charImage} width={30} height={30} />
+          <Badge
+            sx={{
+              padding: ".4em",
+              fontSize: ".9rem",
+              color: `${color.primaryColor}`,
+              backgroundColor: "#fff",
+              position: "absolute",
+              top: "25px",
+              right: "-2px",
+            }}
+          >
+            {cart.quantity}
+          </Badge>
+        </li>
+      </Link>
     </ul>
   );
 };
