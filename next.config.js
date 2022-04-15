@@ -3,10 +3,24 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-module.exports = {
-  nextConfig,
-  env: {
-    MONGODB_URL:
-      "mongodb+srv://Khaled:Khaled@cluster0.pubb9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  },
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+
+module.exports = (phase) => {
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      nextConfig,
+      env: {
+        MONGODB_URL:
+          "mongodb+srv://Khaled:RiD1La0lhHNhC6Ex@cluster0.wgai4.mongodb.net/pizza?retryWrites=true&w=majority",
+      },
+    };
+  }
+
+  return {
+    nextConfig,
+    env: {
+      MONGODB_URL:
+        "mongodb+srv://Khaled:RiD1La0lhHNhC6Ex@cluster0.wgai4.mongodb.net/pizza?retryWrites=true&w=majority",
+    },
+  };
 };
