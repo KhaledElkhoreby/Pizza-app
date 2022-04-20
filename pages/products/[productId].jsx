@@ -54,17 +54,17 @@ const Product = ({ product: pizza }) => {
     }
   };
   return (
-    <Container size="xl">
+    <Container size='xl'>
       <div className={classes.container}>
         <div className={classes.image}>
           <Image
             loader={myLoader}
             src={pizza.img}
-            alt="pizza"
+            alt='pizza'
             width={500}
             height={500}
             priority
-            objectFit="content"
+            objectFit='content'
           />
         </div>
         <div className={classes.details}>
@@ -76,12 +76,11 @@ const Product = ({ product: pizza }) => {
             <div className={classes.sizes}>
               <div
                 className={classes.small}
-                onClick={() => changeSizeHandler(0)}
-              >
+                onClick={() => changeSizeHandler(0)}>
                 <Image
                   src={imageSize}
-                  alt="small size"
-                  objectFit="content"
+                  alt='small size'
+                  objectFit='content'
                   height={45}
                   width={45}
                 />
@@ -89,12 +88,11 @@ const Product = ({ product: pizza }) => {
               </div>
               <div
                 className={classes.medium}
-                onClick={() => changeSizeHandler(1)}
-              >
+                onClick={() => changeSizeHandler(1)}>
                 <Image
                   src={imageSize}
-                  alt="medium size"
-                  objectFit="content"
+                  alt='medium size'
+                  objectFit='content'
                   height={60}
                   width={60}
                 />
@@ -102,12 +100,11 @@ const Product = ({ product: pizza }) => {
               </div>
               <div
                 className={classes.large}
-                onClick={() => changeSizeHandler(2)}
-              >
+                onClick={() => changeSizeHandler(2)}>
                 <Image
                   src={imageSize}
-                  alt="large size"
-                  objectFit="content"
+                  alt='large size'
+                  objectFit='content'
                   height={75}
                   width={75}
                 />
@@ -119,7 +116,7 @@ const Product = ({ product: pizza }) => {
               {pizza.extraOptions.map((extra) => (
                 <label key={extra._id} htmlFor={extra._id}>
                   <input
-                    type="checkbox"
+                    type='checkbox'
                     name={extra.text}
                     id={extra._id}
                     onChange={(e) => changeExtraHandler(e, extra)}
@@ -130,15 +127,15 @@ const Product = ({ product: pizza }) => {
             </div>
             <div className={classes.submit}>
               <input
-                type="number"
-                name="quantity"
-                id="quantity"
+                type='number'
+                name='quantity'
+                id='quantity'
                 min={1}
                 step={1}
                 value={quantity}
                 onChange={changeQuantityHandler}
               />
-              <button type="submit">Add to Cart</button>
+              <button type='submit'>Add to Cart</button>
             </div>
           </form>
         </div>
@@ -153,9 +150,7 @@ export async function getServerSideProps({ params }) {
   const { productId } = params;
   console.log(productId);
 
-  const { data: product } = await axios.get(
-    `http://localhost:3000/api/products/${productId}`
-  );
+  const { data: product } = await axios.get(`/api/products/${productId}`);
   console.log("product :", product);
   return {
     props: { product },
