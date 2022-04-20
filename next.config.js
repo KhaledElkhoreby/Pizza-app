@@ -3,7 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+module.exports = nextConfig;
+
+/* const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
 module.exports = (phase) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
@@ -23,4 +25,4 @@ module.exports = (phase) => {
         "mongodb+srv://Khaled:RiD1La0lhHNhC6Ex@cluster0.wgai4.mongodb.net/pizza?retryWrites=true&w=majority",
     },
   };
-};
+}; */
