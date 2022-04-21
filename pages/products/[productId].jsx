@@ -150,7 +150,9 @@ export async function getServerSideProps({ params }) {
   const { productId } = params;
   console.log(productId);
 
-  const { data: product } = await axios.get(`/api/products/${productId}`);
+  const { data: product } = await axios.get(
+    `${process.env.HOST}/api/products/${productId}`
+  );
   console.log("product :", product);
   return {
     props: { product },
