@@ -1,18 +1,10 @@
-import Image from "next/image";
-import { Container } from "@mantine/core";
-import { useSelector } from "react-redux";
+import Image from 'next/image';
+import { Container } from '@mantine/core';
+import { useSelector } from 'react-redux';
 
-import myLoader from "./../helper/myLoader";
-import classes from "../styles/Cart.module.scss";
+import myLoader from './../helper/myLoader';
+import classes from '../styles/Cart.module.scss';
 
-const cartItems = {
-  src: "pizza.png",
-  Name: "CORALZO",
-  Extras: "Double ingredient spicy sauce",
-  price: 20.0,
-  quantity: 2,
-  total: 40,
-};
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   return (
