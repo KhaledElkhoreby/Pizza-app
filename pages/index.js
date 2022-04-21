@@ -3,9 +3,12 @@ import axios from "axios";
 import Head from "next/head";
 import Features from "../components/Features";
 import PizzaList from "../components/PizzaList";
+import Product from "../models/Product";
+import dbConnect from "../lib/dbConnect";
 
-export default function Home({ products }) {
+export default function Home({ products, error }) {
   console.log("products: ", products);
+  if (error) return "Error";
   return (
     <div>
       <Head>
@@ -22,13 +25,20 @@ export default function Home({ products }) {
 }
 
 export const getServerSideProps = async () => {
-  const { data: products } = await axios.get(
-    `${process.env.HOST}/api/products`
-  );
-  console.log(products);
-  return {
-    props: {
-      products,
-    },
-  };
+  try {
+    await dbConnect();
+    const results = await Product.find();
+    const products = await JSON.parse(JSON.stringify(results));
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error,
+      },
+    };
+  }
 };

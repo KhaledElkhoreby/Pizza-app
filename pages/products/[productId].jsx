@@ -9,14 +9,18 @@ import classes from "../../styles/Product.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
+import dbConnect from "../../lib/dbConnect";
+import ProductModel from "../../models/Product";
 
-const Product = ({ product: pizza }) => {
+const Product = ({ product: pizza, error }) => {
   const [price, setPrice] = useState(pizza.prices[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
 
   const dispatch = useDispatch();
+
+  if (error) return "Error";
 
   console.log("price: ", price);
   console.log("size: ", size);
@@ -53,6 +57,7 @@ const Product = ({ product: pizza }) => {
       setExtras((prev) => prev.filter((e) => e._id !== extra._id));
     }
   };
+
   return (
     <Container size='xl'>
       <div className={classes.container}>
@@ -147,14 +152,17 @@ const Product = ({ product: pizza }) => {
 export default Product;
 
 export async function getServerSideProps({ params }) {
-  const { productId } = params;
-  console.log(productId);
-
-  const { data: product } = await axios.get(
-    `${process.env.HOST}/api/products/${productId}`
-  );
-  console.log("product :", product);
-  return {
-    props: { product },
-  };
+  try {
+    const { productId } = params;
+    await dbConnect();
+    const result = await ProductModel.findById(productId);
+    const product = await JSON.parse(JSON.stringify(result));
+    return {
+      props: { product },
+    };
+  } catch (error) {
+    return {
+      props: { error },
+    };
+  }
 }
