@@ -1,6 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from 'mongoose';
 
-const orderSchema = mongoose.Schema(
+export interface IOrder {
+  orderId: number;
+  customer: string;
+  address: string;
+  total: number;
+  status: number;
+  method: number;
+}
+
+const orderSchema = new mongoose.Schema<IOrder, Model<IOrder>>(
   {
     orderId: {
       type: Number,
@@ -31,4 +40,5 @@ const orderSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model.Order || mongoose.model("Order", orderSchema);
+export default (mongoose.models.Order as Model<IOrder>) ||
+  mongoose.model<IOrder, Model<IOrder>>('Order', orderSchema);

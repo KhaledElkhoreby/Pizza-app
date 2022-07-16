@@ -9,6 +9,7 @@
   font-weight: 500;
   height: 100px;
   @include mixins.reset-ul();
+
   li {
     padding: 0.1em 0;
     @include mixins.center-content();
@@ -19,17 +20,20 @@
   .phone {
     display: flex;
     gap: 0.85em;
+
     div:first-of-type {
       background-color: #fff;
       @include mixins.rounded-circle(50px);
       @include mixins.center-content();
     }
+
     div {
       p:first-of-type {
         margin-bottom: 0;
         font-size: 15.5px;
         font-weight: 500;
       }
+
       p:last-of-type {
         margin-top: 0;
         font-size: 20px;
@@ -42,19 +46,24 @@
   //! MainNav
   .mainNav {
     flex: 3;
+
     ul {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+
       li {
         flex: 1;
         padding: 0 1em;
+        cursor: pointer;
       }
+
       li:nth-child(4) {
         flex: 2;
         min-width: 160px;
       }
     }
+
     @media (max-width: variables.$lg) {
       display: none;
     }

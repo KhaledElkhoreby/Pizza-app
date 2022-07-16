@@ -1,35 +1,50 @@
-import Image from "next/image";
-import { Container } from "@mantine/core";
-import axios from "axios";
+import { Container } from '@mantine/core';
+import Image from 'next/image';
 
-import myLoader from "../../helper/myLoader";
-import imageSize from "../../public/images/size.png";
+import myLoader from '../../helper/myLoader';
+import imageSize from '../../public/images/size.png';
 
-import classes from "../../styles/Product.module.scss";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/cartSlice";
-import dbConnect from "../../lib/dbConnect";
-import ProductModel from "../../models/Product";
+import { GetServerSideProps } from 'next';
+import { useState } from 'react';
+import dbConnect from '../../lib/dbConnect';
+import ProductModel, { IProduct } from '../../models/Product';
+import { addProduct } from '../../redux/cartSlice';
+import { useAppDispatch } from '../../redux/hooks';
+import classes from '../../styles/Product.module.scss';
 
-const Product = ({ product: pizza, error }) => {
+const Product = ({
+  product: pizza,
+  error,
+}: {
+  product: IProduct;
+  error: Error;
+}) => {
   const [price, setPrice] = useState(pizza.prices[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  if (error) return "Error";
+  if (error) return 'Error';
 
-  console.log("price: ", price);
-  console.log("size: ", size);
-  console.log("quantity: ", quantity);
-  console.log("Extras: ", extras);
+  console.log('price: ', price);
+  console.log('size: ', size);
+  console.log('quantity: ', quantity);
+  console.log('Extras: ', extras);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(addProduct({ ...pizza, price, size, quantity, extras }));
+    dispatch(
+      addProduct({
+        ...pizza,
+        unitPrice: price / quantity,
+        totalCartItemPrice: price,
+        size,
+        quantity,
+        extraOptions: extras,
+      })
+    );
   };
   const changeQuantityHandler = (e) => {
     const q = e.target.value;
@@ -59,17 +74,17 @@ const Product = ({ product: pizza, error }) => {
   };
 
   return (
-    <Container size='xl'>
+    <Container size="xl">
       <div className={classes.container}>
         <div className={classes.image}>
           <Image
             loader={myLoader}
             src={pizza.img}
-            alt='pizza'
+            alt="pizza"
             width={500}
             height={500}
             priority
-            objectFit='content'
+            objectFit="contain"
           />
         </div>
         <div className={classes.details}>
@@ -81,11 +96,12 @@ const Product = ({ product: pizza, error }) => {
             <div className={classes.sizes}>
               <div
                 className={classes.small}
-                onClick={() => changeSizeHandler(0)}>
+                onClick={() => changeSizeHandler(0)}
+              >
                 <Image
                   src={imageSize}
-                  alt='small size'
-                  objectFit='content'
+                  alt="small size"
+                  objectFit="contain"
                   height={45}
                   width={45}
                 />
@@ -93,11 +109,12 @@ const Product = ({ product: pizza, error }) => {
               </div>
               <div
                 className={classes.medium}
-                onClick={() => changeSizeHandler(1)}>
+                onClick={() => changeSizeHandler(1)}
+              >
                 <Image
                   src={imageSize}
-                  alt='medium size'
-                  objectFit='content'
+                  alt="medium size"
+                  objectFit="contain"
                   height={60}
                   width={60}
                 />
@@ -105,11 +122,12 @@ const Product = ({ product: pizza, error }) => {
               </div>
               <div
                 className={classes.large}
-                onClick={() => changeSizeHandler(2)}>
+                onClick={() => changeSizeHandler(2)}
+              >
                 <Image
                   src={imageSize}
-                  alt='large size'
-                  objectFit='content'
+                  alt="large size"
+                  objectFit="contain"
                   height={75}
                   width={75}
                 />
@@ -121,7 +139,7 @@ const Product = ({ product: pizza, error }) => {
               {pizza.extraOptions.map((extra) => (
                 <label key={extra._id} htmlFor={extra._id}>
                   <input
-                    type='checkbox'
+                    type="checkbox"
                     name={extra.text}
                     id={extra._id}
                     onChange={(e) => changeExtraHandler(e, extra)}
@@ -132,15 +150,15 @@ const Product = ({ product: pizza, error }) => {
             </div>
             <div className={classes.submit}>
               <input
-                type='number'
-                name='quantity'
-                id='quantity'
+                type="number"
+                name="quantity"
+                id="quantity"
                 min={1}
                 step={1}
                 value={quantity}
                 onChange={changeQuantityHandler}
               />
-              <button type='submit'>Add to Cart</button>
+              <button type="submit">Add to Cart</button>
             </div>
           </form>
         </div>
@@ -151,7 +169,7 @@ const Product = ({ product: pizza, error }) => {
 
 export default Product;
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const { productId } = params;
     await dbConnect();
@@ -165,4 +183,4 @@ export async function getServerSideProps({ params }) {
       props: { error },
     };
   }
-}
+};

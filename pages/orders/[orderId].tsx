@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { Container } from "@mantine/core";
-import myLoader from "../../helper/myLoader";
-import classes from "../../styles/Order.module.scss";
+import Image from 'next/image';
+import { Container } from '@mantine/core';
+import myLoader from '../../helper/myLoader';
+import classes from '../../styles/Order.module.scss';
 
 const Order = () => {
   const status = 0;
@@ -43,10 +43,10 @@ const Order = () => {
                 <Image
                   alt="payment"
                   loader={myLoader}
-                  src={"paid.png"}
+                  src={'paid.png'}
                   width={50}
                   height={50}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
               <p>Payment</p>
@@ -54,10 +54,10 @@ const Order = () => {
                 <Image
                   alt="checked"
                   loader={myLoader}
-                  src={"checked.png"}
+                  src={'checked.png'}
                   width={30}
                   height={30}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
             </div>
@@ -66,10 +66,10 @@ const Order = () => {
                 <Image
                   alt="preparing"
                   loader={myLoader}
-                  src={"bake.png"}
+                  src={'bake.png'}
                   width={50}
                   height={50}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
               <p>Preparing</p>
@@ -77,10 +77,10 @@ const Order = () => {
                 <Image
                   alt="checked"
                   loader={myLoader}
-                  src={"checked.png"}
+                  src={'checked.png'}
                   width={30}
                   height={30}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
             </div>
@@ -89,10 +89,10 @@ const Order = () => {
                 <Image
                   alt="on the way"
                   loader={myLoader}
-                  src={"bike.png"}
+                  src={'bike.png'}
                   width={50}
                   height={50}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
               <p>On the way</p>
@@ -100,10 +100,10 @@ const Order = () => {
                 <Image
                   alt="checked"
                   loader={myLoader}
-                  src={"checked.png"}
+                  src={'checked.png'}
                   width={30}
                   height={30}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
             </div>
@@ -112,10 +112,10 @@ const Order = () => {
                 <Image
                   alt="delivered"
                   loader={myLoader}
-                  src={"delivered.png"}
+                  src={'delivered.png'}
                   width={50}
                   height={50}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
               <p>Delivered</p>
@@ -123,10 +123,10 @@ const Order = () => {
                 <Image
                   alt="checked"
                   loader={myLoader}
-                  src={"checked.png"}
+                  src={'checked.png'}
                   width={30}
                   height={30}
-                  objectFit="content"
+                  objectFit="contain"
                 />
               </div>
             </div>

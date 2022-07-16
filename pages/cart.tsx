@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { Container } from '@mantine/core';
-import { useSelector } from 'react-redux';
 
-import myLoader from './../helper/myLoader';
+import myLoader from '../helper/myLoader';
 import classes from '../styles/Cart.module.scss';
+import { useAppSelector } from '../redux/hooks';
 
 const Cart = () => {
-  const products = useSelector((state) => state.cart.products);
+  const { cartItems, totalCartPrice, TotalCartQuantity } = useAppSelector(
+    (state) => state.cart
+  );
   return (
     <Container size="xl">
       <div className={classes.container}>
@@ -23,8 +25,8 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
+              {cartItems?.map((product) => (
+                <tr key={`${product._id}_${product.totalCartItemPrice}`}>
                   <td className={classes.imgContainer}>
                     <Image
                       alt=""
@@ -36,11 +38,13 @@ const Cart = () => {
                   </td>
                   <td className={classes.name}>{product?.title}</td>
                   <td className={classes.extra}>
-                    {product?.extras.map((extra) => `${extra.text}, `)}
+                    {product?.extraOptions.map((extra) => `${extra.text}, `)}
                   </td>
-                  <td className={classes.price}>{product?.price}</td>
-                  <td className={classes.quantity}>{product?.quantity}</td>
-                  <td className={classes.total}>{product?.total}</td>
+                  <td className={classes.price}>{product?.unitPrice}</td>
+                  <td className={classes.quantity}>X{product?.quantity}</td>
+                  <td className={classes.total}>
+                    {product?.totalCartItemPrice}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -51,7 +55,7 @@ const Cart = () => {
           <div>
             <p>
               <span>Subtotal</span>
-              <span>$79.60</span>
+              <span>${totalCartPrice}</span>
             </p>
             <p>
               <span>Discount:</span>
@@ -60,7 +64,7 @@ const Cart = () => {
             <hr />
             <p>
               <span>Total:</span>
-              <span>$79.60</span>
+              <span>${totalCartPrice}</span>
             </p>
           </div>
           <button>CHECKOUT NOW</button>
