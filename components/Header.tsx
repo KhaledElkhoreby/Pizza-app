@@ -1,9 +1,9 @@
-import classes from "../styles/Header.module.scss";
-import { useEffect } from "react";
-import { useRef } from "react";
+import classes from '../styles/Header.module.scss';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const Header = ({ children }) => {
-  const ref = useRef();
+  const ref = useRef<HTMLElement>();
 
   useEffect(() => {
     const scrollFunction = () => {
@@ -11,9 +11,10 @@ const Header = ({ children }) => {
         document.body.scrollTop > 50 ||
         document.documentElement.scrollTop > 50
       ) {
-        ref.current.style = "box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75)";
+        ref.current.style.cssText =
+          'box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75)';
       } else {
-        ref.current.style.boxShadow = "none";
+        ref.current.style.boxShadow = 'none';
       }
     };
 
