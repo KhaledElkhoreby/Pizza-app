@@ -5,7 +5,9 @@ import myLoader from '../../helper/myLoader';
 import imageSize from '../../public/images/size.png';
 
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import axiosInstance from '../../lib/axios';
 import dbConnect from '../../lib/dbConnect';
 import ProductModel, { IProduct } from '../../models/Product';
 import { addProduct } from '../../redux/cartSlice';
@@ -23,29 +25,17 @@ const Product = ({
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [extras, setExtras] = useState([]);
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
 
-  if (error) return 'Error';
+  if (error) return error.message;
 
   console.log('price: ', price);
   console.log('size: ', size);
   console.log('quantity: ', quantity);
   console.log('Extras: ', extras);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      addProduct({
-        ...pizza,
-        unitPrice: price / quantity,
-        totalCartItemPrice: price,
-        size,
-        quantity,
-        extraOptions: extras,
-      })
-    );
-  };
   const changeQuantityHandler = (e) => {
     const q = e.target.value;
     const priceWithOutQuantity = price / quantity;
@@ -70,6 +60,46 @@ const Product = ({
     } else {
       setPrice((prev) => prev - extraPrice * quantity);
       setExtras((prev) => prev.filter((e) => e._id !== extra._id));
+    }
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      addProduct({
+        ...pizza,
+        unitPrice: price / quantity,
+        totalCartItemPrice: price,
+        size,
+        quantity,
+        extraOptions: extras,
+      })
+    );
+    setPrice(pizza.prices[0]);
+    setExtras([]);
+    setQuantity(1);
+    setSize(0);
+    document
+      .querySelectorAll('input[type=checkbox]')
+      .forEach((el: HTMLInputElement) => (el.checked = false));
+  };
+
+  const checkoutHandler = async () => {
+    const { data } = await axiosInstance.post(`/api/create-checkout-session`, {
+      cartItems: [
+        {
+          ...pizza,
+          unitPrice: price / quantity,
+          totalCartItemPrice: price,
+          size,
+          quantity,
+          extraOptions: extras,
+        },
+      ],
+    });
+    console.log(data);
+    if (data.url) {
+      router.push(data.url);
     }
   };
 
@@ -159,6 +189,7 @@ const Product = ({
                 onChange={changeQuantityHandler}
               />
               <button type="submit">Add to Cart</button>
+              <button onClick={checkoutHandler}>Pay Now</button>
             </div>
           </form>
         </div>

@@ -27,12 +27,14 @@ $primary-color: variables.$primary-color;
       color: #ffffff;
       text-align: left;
     }
+
     th,
     td {
       text-align: center;
       border-radius: 5px;
       padding: 12px 15px;
     }
+
     tbody tr {
       border-radius: 5px;
       border-bottom: 1px solid #dddddd;
@@ -50,33 +52,61 @@ $primary-color: variables.$primary-color;
     border-radius: 5px;
     padding: 20px;
     text-align: center;
+
     h1 {
       padding-bottom: 10px;
     }
+
     hr {
       border-bottom: 2px solid #f3f3f3;
     }
+
     div {
       text-align: left;
       font-size: 1.15rem;
       font-weight: bold;
       margin-bottom: 2em;
       @include mixins.small-container;
+
       P {
         margin: 0.25em;
       }
+
       span {
         &:first-of-type {
           display: inline-block;
           min-width: 5em;
         }
+
         &:last-of-type {
           margin-left: 1em;
         }
       }
     }
+
     button {
       @include mixins.button;
+
+      &:hover {
+        border-color: darkgreen;
+      }
+
+      &:disabled {
+        background-color: lightgray;
+        color: rgba(0, 0, 0, 0.75);
+        box-shadow: none;
+        border: gray;
+        cursor: not-allowed;
+
+        &:hover {
+          background-color: lightgray;
+          color: rgba(0, 0, 0, 0.75);
+          box-shadow: none;
+          border: gray;
+          cursor: not-allowed;
+
+        }
+      }
     }
   }
 }
@@ -84,6 +114,7 @@ $primary-color: variables.$primary-color;
 @media screen and (max-width: 769px) {
   .container {
     flex-direction: column;
+
     .cartTotal {
       div {
         font-size: 0.85rem;

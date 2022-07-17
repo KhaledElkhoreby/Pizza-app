@@ -1,14 +1,27 @@
-import Image from 'next/image';
 import { Container } from '@mantine/core';
+import Image from 'next/image';
 
+import { useRouter } from 'next/router';
 import myLoader from '../helper/myLoader';
-import classes from '../styles/Cart.module.scss';
+import axiosInstance from '../lib/axios';
 import { useAppSelector } from '../redux/hooks';
+import classes from '../styles/Cart.module.scss';
 
 const Cart = () => {
+  const router = useRouter();
   const { cartItems, totalCartPrice, TotalCartQuantity } = useAppSelector(
     (state) => state.cart
   );
+
+  const checkoutHandler = async () => {
+    const { data } = await axiosInstance.post(`/api/create-checkout-session`, {
+      cartItems,
+    });
+    console.log(data);
+    if (data.url) {
+      router.push(data.url);
+    }
+  };
   return (
     <Container size="xl">
       <div className={classes.container}>
@@ -67,7 +80,9 @@ const Cart = () => {
               <span>${totalCartPrice}</span>
             </p>
           </div>
-          <button>CHECKOUT NOW</button>
+          <button onClick={checkoutHandler} disabled={cartItems.length === 0}>
+            CHECKOUT NOW
+          </button>
         </div>
       </div>
     </Container>

@@ -5,11 +5,13 @@
   display: grid;
   place-items: center;
 }
+
 @mixin reset-ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 @mixin rounded-circle($length) {
   width: $length;
   height: $length;
@@ -18,16 +20,23 @@
 
 @mixin button {
   border-radius: 5px;
-  padding: 0.55em 0.75em;
-  border: 2px solid variables.$primary-color;
+  padding: .85em 0.75em;
+  border: 3px solid variables.$primary-color;
   background-color: variables.$primary-color;
   font-weight: 600;
   transition: all 0.3s ease;
   cursor: pointer;
+  color: #fff;
+
   &:focus,
   &:hover,
   &:active {
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+
+  &:hover {
+    background-color: #fff;
+    color: black
   }
 }
 

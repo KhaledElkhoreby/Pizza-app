@@ -33,7 +33,9 @@ const Navbar = ({ color }) => {
           <li>
             <Link href="/">Homepage</Link>
           </li>
-          <li>Products</li>
+          <li>
+            <Link href="/products">Products</Link>
+          </li>
           <li>Menu</li>
           <Link href="/">
             <li>

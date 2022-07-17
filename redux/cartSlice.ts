@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IProduct } from '../models/Product';
 
-interface ICartItem extends IProduct {
+export interface ICartItem extends IProduct {
   unitPrice: number;
   totalCartItemPrice: number;
   size: keyof [0, 1, 2];
@@ -32,7 +32,7 @@ const cartSlice = createSlice({
       const payload = action.payload;
       state.cartItems.push(payload);
       state.TotalCartQuantity += +payload.quantity;
-      state.totalCartPrice += payload.totalCartItemPrice * payload.quantity;
+      state.totalCartPrice += payload.totalCartItemPrice;
     },
     reset: (state) => {
       state.cartItems = [];
