@@ -23,7 +23,21 @@ export default async function handler(
     }));
     try {
       const session = await stripe.checkout.sessions.create({
-        line_items,
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'sdf',
+                description: '',
+                images: ['df'],
+                metadata: {},
+              },
+              unit_amount: 56,
+            },
+            quantity: 5,
+          },
+        ],
         mode: 'payment',
         success_url: `${req.headers.origin}/`,
         cancel_url: `${req.headers.origin}/${
